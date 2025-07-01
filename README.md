@@ -116,29 +116,9 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 │       └── index.pkl
 ├── docs/              # Documentação do projeto.
 │   └── fluxo_de_execucao_modulos.md
-├── Dockerfile         # Definições para a imagem Docker da aplicação.
-├── docker-compose.yml # Definições para orquestração de serviços Docker.
-├── erro.txt           # Arquivo para logs de erros.
-├── frontend/          # Aplicação frontend (React/TypeScript).
-│   ├── public/        # Ativos públicos (e.g., vite.svg).
-│   ├── src/           # Código-fonte do frontend.
-│   │   ├── assets/    # Ativos como imagens.
-│   │   ├── App.css
-│   │   ├── App.tsx
-│   │   ├── index.css
-│   │   └── main.tsx
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── README.md
-│   ├── tsconfig.app.json
-│   ├── tsconfig.json
-│   ├── tsconfig.node.json
-│   └── vite.config.ts
+├── 
 ├── logs/              # Arquivos de log da aplicação Python.
 ├── main.py            # Ponto de entrada da aplicação (CLI).
-├── planejamento.txt   # Arquivo de planejamento ou notas.
 ├── README.md          # Documentação principal do projeto.
 ├── requirements.txt   # Dependências Python do projeto.
 └── src/               # Código-fonte principal da aplicação Python.
