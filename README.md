@@ -70,46 +70,6 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 
 ## ⚡ Como Executar
 
-Existem duas maneiras de executar o projeto: via Docker (recomendado) ou localmente.
-
-### 🐳 Via Docker (Recomendado)
-
-Esta é a forma mais simples e segura de executar a aplicação, pois todo o ambiente já está configurado dentro do contêiner, utilizando o `docker-compose` para orquestração.
-
-1.  **Garanta que o `.env` esteja na raiz do projeto:**
-    Certifique-se de que o arquivo `.env` com suas chaves de API (conforme a seção "Configuração") esteja na raiz do diretório do projeto.
-
-2.  **Construa e inicie os serviços com Docker Compose:**
-    No terminal, na raiz do projeto, execute o comando para construir a imagem e iniciar o contêiner:
-    ```bash
-    docker compose up --build -d
-    ```
-    Este comando:
-    - `up`: Inicia os serviços definidos no `docker-compose.yml`.
-    - `--build`: Constrói a imagem se ela ainda não existir ou se houver alterações no `Dockerfile`.
-    - `-d`: Executa o contêiner em segundo plano (detached mode).
-
-3.  **Execute o Pipeline de ETL (dentro do contêiner):
-**Uma vez que o contêiner esteja rodando, você pode executar o pipeline de ETL ou interagir com o chat. Os dados, logs e gráficos gerados serão salvos diretamente nas pastas `data`, `logs` e `chat_outputs` no seu computador, devido aos volumes configurados no `docker-compose.yml`.
-    ```bash
-    docker compose exec poke-rpa-pipeline python main.py pipeline
-    ```
-
-4.  **Inicie o Chat Interativo (dentro do contêiner):
-**Para iniciar o chat, use:
-    ```bash
-    docker compose exec -it poke-rpa-pipeline python main.py chat
-    ```
-    Para sair do chat, digite `exit` ou `quit`.
-
-5.  **Parar e remover os serviços (opcional):
-**Quando terminar de usar, você pode parar e remover os contêineres, redes e volumes criados pelo `docker-compose` (exceto os volumes persistentes `data`, `logs` e `chat_outputs` que você criou manualmente para a persistência):
-    ```bash
-    docker compose down
-    ```
-
-6.  **Inicie o Frontend (Chat Interativo via Web) via Docker:**
-    Se você configurou o serviço de frontend no `docker-compose.yml`, o frontend será iniciado automaticamente junto com o backend quando você executar `docker compose up --build -d`. Você pode então acessar o chat interativo no seu navegador através do endereço `http://localhost:5173`.
 
 ### 🐍 Localmente (Sem Docker)
 
@@ -139,14 +99,6 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
     python main.py chat
     ```
 
-5.  **Inicie o Frontend (Chat Interativo via Web):**
-    Para interagir com o chat através da interface web, navegue até o diretório `frontend`, instale as dependências e inicie o servidor de desenvolvimento:
-    ```bash
-    cd frontend
-    npm install
-    npm run dev
-    ```
-    Após executar o comando `npm run dev`, o frontend estará acessível no seu navegador, geralmente em `http://localhost:5173` (ou uma porta similar, indicada no terminal).
 
 ---
 
