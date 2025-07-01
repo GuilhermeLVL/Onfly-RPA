@@ -55,6 +55,9 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 3.  **Adicione as chaves de API ao arquivo `.env`:**
     Você precisa de pelo menos uma das chaves abaixo. O sistema priorizará a chave do Groq se ambas estiverem presentes.
 
+    https://console.groq.com/keys
+    https://platform.openai.com/account/api-keys
+
     ```env
     # Chave da API do Groq (recomendado, mais rápido e gratuito)
     GROQ_API_KEY="sua_chave_aqui"
@@ -209,7 +212,4 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
 ### Fluxo de Execução dos Módulos
 ![Fluxo de Execução dos Módulos](docs/Editor _ Mermaid Chart-2025-07-01-023651.png)
 
-https://www.mermaidchart.com/app/projects/c34e6cdc-58d1-4fb7-9a9d-907fdbc382e7/diagrams/f1a30f46-5e6b-4afd-9918-2663ff8f3bec/share/invite/
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-eyJkb2N1bWVudElEIjoiZjFhMzBmNDYtNWU2Yi00YWZkLTk5MTgtMjY2M2ZmOGYzYmVjIiwiYWNjZXNzIjoiRWRpdCIsImlhdCI6MTc1MTMzNzQyMH0.
-CNDu1sB6TZUVIto5KUTRa5Ol7EigNhog0EvBCznCW0s
+https://www.mermaidchart.com/app/projects/c34e6cdc-58d1-4fb7-9a9d-907fdbc382e7/diagrams/f1a30f46-5e6b-4afd-9918-2663ff8f3bec/version/v0.1/edit
