@@ -1,0 +1,15 @@
+requests
+pandas
+matplotlib
+seaborn
+python-dotenv
+langchain-core
+langchain-community
+langchain-openai
+langchain-groq
+langgraph
+faiss-cpu
+sentence-transformers
+langchain-huggingface
+fastapi
+uvicorn
