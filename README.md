@@ -73,8 +73,6 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 
 ## ⚡ Como Executar
 
-<<<<<<< HEAD
-Existem duas maneiras de executar o projeto: via Docker (recomendado) ou localmente.
 
 ### 🐳 Via Docker (Recomendado)
 
@@ -107,56 +105,81 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
 
     1. Abra um novo terminal na raiz do projeto (deixe o terminal do `docker-compose up` rodando em paralelo).
     2. Execute o comando abaixo para acessar o chat interativo dentro do container backend:
+
        ```bash
        docker-compose exec backend python main.py chat
        ```
+   
     3. Converse normalmente com a IA pelo terminal.
     4. Para sair do chat, digite `sair` ou `exit`.
 
     > **Dica:** Você pode executar o pipeline de ETL ou o chat quantas vezes quiser, sempre usando o comando `docker-compose exec backend ...` para rodar comandos interativos dentro do container.
 
-5.  **Parar e remover os serviços (opcional):
-**Quando terminar de usar, você pode parar e remover os contêineres, redes e volumes criados pelo `docker-compose` (exceto os volumes persistentes `data`, `logs` e `chat_outputs` que você criou manualmente para a persistência):
-    ```bash
-    docker compose down
-    ```
 
-6. **Front-end:**
-   ```bash
-   docker-compose up --build
-   ```
+5. **Front-end:**
+ 
    - O backend (API) estará em http://localhost:8001
    - O frontend estará em http://localhost
-=======
->>>>>>> e3c6aa1f23c0abc6d731808c1d0338b2de616cb6
+
+---
+
+
 
 ### 🐍 Localmente (Sem Docker)
 
-1.  **Crie e ative um ambiente virtual:**
-    ```bash
-    # Windows
-    python -m venv venv
-    .\venv\Scripts\activate
+1. **Crie e ative um ambiente virtual para o backend (API):**
 
-    # Linux / macOS
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+   ```bash
+   # Windows
+   python -m venv venv
+   .\venv\Scripts\activate
 
-2.  **Instale as dependências:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+   # Linux / macOS
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-3.  **Execute o Pipeline de ETL:**
-    ```bash
-    python main.py pipeline
-    ```
+2. **Instale as dependências do backend:**
 
-4.  **Inicie o Chat Interativo:**
-    ```bash
-    python main.py chat
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Execute o Pipeline de ETL (opcional):**
+
+   ```bash
+   python main.py pipeline
+   ```
+
+4. **Inicie a API (backend):**
+
+   ```bash
+   python main.py api
+   # ou, se o comando acima não existir, rode:
+   uvicorn api:app --reload --host 0.0.0.0 --port 8001
+   ```
+   A API estará disponível em: http://localhost:8001
+
+
+
+5. **Execute o frontend (React/Vite):**
+
+   Abra um novo terminal, navegue até a pasta `frontend` e execute:
+
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+   O frontend estará disponível em: http://localhost:5173 (ou a porta exibida no terminal)
+
+
+
+6. **(Opcional) Inicie o Chat Interativo pelo terminal:**
+
+   ```bash
+   python main.py chat
+   ```
 
     
 
