@@ -94,6 +94,7 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 
 ## ⚡ Como Executar
 
+<<<<<<< HEAD
 Existem duas maneiras de executar o projeto: via Docker (recomendado) ou localmente.
 
 ### 🐳 Via Docker (Recomendado)
@@ -143,6 +144,8 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
 
 6.  **Inicie o Frontend (Chat Interativo via Web) via Docker:**
     Se você configurou o serviço de frontend no `docker-compose.yml`, o frontend será iniciado automaticamente junto com o backend quando você executar `docker compose up --build -d`. Você pode então acessar o chat interativo no seu navegador através do endereço `http://localhost:5173`.
+=======
+>>>>>>> e3c6aa1f23c0abc6d731808c1d0338b2de616cb6
 
 ### 🐍 Localmente (Sem Docker)
 
@@ -172,14 +175,6 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
     python main.py chat
     ```
 
-5.  **Inicie o Frontend (Chat Interativo via Web):**
-    Para interagir com o chat através da interface web, navegue até o diretório `frontend`, instale as dependências e inicie o servidor de desenvolvimento:
-    ```bash
-    cd frontend
-    npm install
-    npm run dev
-    ```
-    Após executar o comando `npm run dev`, o frontend estará acessível no seu navegador, geralmente em `http://localhost:5173` (ou uma porta similar, indicada no terminal).
 
 ---
 
@@ -197,29 +192,9 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
 │       └── index.pkl
 ├── docs/              # Documentação do projeto.
 │   └── fluxo_de_execucao_modulos.md
-├── Dockerfile         # Definições para a imagem Docker da aplicação.
-├── docker-compose.yml # Definições para orquestração de serviços Docker.
-├── erro.txt           # Arquivo para logs de erros.
-├── frontend/          # Aplicação frontend (React/TypeScript).
-│   ├── public/        # Ativos públicos (e.g., vite.svg).
-│   ├── src/           # Código-fonte do frontend.
-│   │   ├── assets/    # Ativos como imagens.
-│   │   ├── App.css
-│   │   ├── App.tsx
-│   │   ├── index.css
-│   │   └── main.tsx
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── README.md
-│   ├── tsconfig.app.json
-│   ├── tsconfig.json
-│   ├── tsconfig.node.json
-│   └── vite.config.ts
+├── 
 ├── logs/              # Arquivos de log da aplicação Python.
 ├── main.py            # Ponto de entrada da aplicação (CLI).
-├── planejamento.txt   # Arquivo de planejamento ou notas.
 ├── README.md          # Documentação principal do projeto.
 ├── requirements.txt   # Dependências Python do projeto.
 └── src/               # Código-fonte principal da aplicação Python.
