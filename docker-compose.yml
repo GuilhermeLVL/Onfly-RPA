@@ -1,24 +1,24 @@
 version: '3.8'
+
 services:
-  poke-rpa-pipeline:
-    build: .
-    container_name: poke-rpa-pipeline
-    volumes:
-      - ./data:/app/data
-      - ./chat_outputs:/app/chat_outputs
-      - ./logs:/app/logs
-      - ./erro.txt:/app/erro.txt
-      - ./planejamento.txt:/app/planejamento.txt
-    command: ["python", "main.py", "chat"] # Pode ser alterado para "pipeline" ou outros comandos
-    # environment:
-    #   - YOUR_ENV_VAR=your_value # Exemplo de variável de ambiente, se necessário 
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: poke-rpa-backend
+    ports:
+      - "8001:8001"
+    # volumes:
+    #   - .:/app  # Removido para evitar sobrescrita e problemas de permissão em produção
+    env_file:
+      - .env
+
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: poke-rpa-frontend
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules # Garante que node_modules seja um volume separado para evitar problemas de permissão
+      - "80:80"  # Porta padrão do Nginx para acesso mais simples
     depends_on:
-      - poke-rpa-pipeline # O frontend depende do backend para a API 
+      - backend

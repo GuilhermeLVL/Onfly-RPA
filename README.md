@@ -208,6 +208,12 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
     └── rag_builder.py # Construtor/inicializador do sistema RAG.
 ```
 
+## 📚 Documentação Detalhada
+
+Para uma análise aprofundada da arquitetura, fluxo de execução dos módulos e detalhes de implementação de cada componente, consulte o nosso documento de fluxo de execução:
+
+- **[Fluxo de Execução Detalhado dos Módulos](docs/fluxo_de_execucao_modulos.md)**
+
 
 ### Fluxo de Execução dos Módulos
 ![Fluxo de Execução dos Módulos](docs/Editor _ Mermaid Chart-2025-07-01-023651.png)
