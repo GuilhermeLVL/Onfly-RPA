@@ -66,27 +66,6 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
      - https://console.groq.com/keys
      - https://platform.openai.com/account/api-keys
 
-3. **Garanta que as pastas `logs`, `chat_outputs` e `data` existam**
-   - Elas já são criadas automaticamente, mas se necessário, crie manualmente:
-     ```bash
-     mkdir logs chat_outputs data
-     ```
-
-4. **Execute tudo com Docker Compose:**
-   ```bash
-   docker-compose up --build
-   ```
-   - O backend (API) estará em http://localhost:8001
-   - O frontend estará em http://localhost
-
-5. **Acesse no navegador:**
-   - Frontend: http://localhost
-   - API: http://localhost:8001/docs (Swagger UI)
-
-6. **Dicas:**
-   - Para reiniciar, use `docker-compose down` e depois `docker-compose up --build`.
-   - Se quiser resetar dados, apague o conteúdo das pastas `logs`, `chat_outputs` e `data`.
-   - Se aparecer erro de CORS, certifique-se de que o backend foi reiniciado após editar `.env` ou código.
 
 ---
 
@@ -142,8 +121,12 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
     docker compose down
     ```
 
-6.  **Inicie o Frontend (Chat Interativo via Web) via Docker:**
-    Se você configurou o serviço de frontend no `docker-compose.yml`, o frontend será iniciado automaticamente junto com o backend quando você executar `docker compose up --build -d`. Você pode então acessar o chat interativo no seu navegador através do endereço `http://localhost:5173`.
+6. **Front-end:**
+   ```bash
+   docker-compose up --build
+   ```
+   - O backend (API) estará em http://localhost:8001
+   - O frontend estará em http://localhost
 =======
 >>>>>>> e3c6aa1f23c0abc6d731808c1d0338b2de616cb6
 
@@ -175,46 +158,67 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
     python main.py chat
     ```
 
+    
+
 
 ---
+
 
 ## 📂 Estrutura do Projeto
 
 ```
-.
-├── api.py             # API RESTful para interação com o ETL e RAG.
-├── chat_outputs/      # Saídas geradas pelo chat (histórico, dados, gráficos).
-│   ├── dados/         # Dados extraídos e transformados (e.g., CSV).
-│   └── historico.txt  # Histórico das interações do chat.
-├── data/              # Dados brutos, processados e índices do FAISS.
-│   └── indice_faiss/  # Índice FAISS para o sistema RAG.
-│       ├── index.faiss
-│       └── index.pkl
-├── docs/              # Documentação do projeto.
-│   └── fluxo_de_execucao_modulos.md
-├── 
-├── logs/              # Arquivos de log da aplicação Python.
-├── main.py            # Ponto de entrada da aplicação (CLI).
-├── README.md          # Documentação principal do projeto.
-├── requirements.txt   # Dependências Python do projeto.
-└── src/               # Código-fonte principal da aplicação Python.
-    ├── config/        # Configurações globais.
-    │   └── settings.py
-    ├── etl/           # Módulos para Extração, Transformação e Carga de dados.
-    │   ├── extractor.py
-    │   ├── pipeline.py
-    │   ├── reporter.py
-    │   └── transformer.py
-    ├── rag/           # Módulos do sistema RAG (Retrieval Augmented Generation).
-    │   ├── chat_history.py
-    │   ├── rag_core.py
-    │   └── rag_data_loader.py
-    ├── utils/         # Utilitários diversos.
-    │   ├── cache.py
-    │   └── logger.py
-    ├── rag.py         # Lógica principal do RAG (pode ser refatorado em rag_core.py).
-    └── rag_builder.py # Construtor/inicializador do sistema RAG.
+Onfly-RPA/
+├── api.py                # API RESTful para interação com o ETL e RAG
+├── docker-compose.yml    # Orquestração dos containers backend/frontend
+├── Dockerfile            # Dockerfile do backend (Python)
+├── main.py               # Ponto de entrada da aplicação backend
+├── README.md             # Documentação principal do projeto
+├── requirements.txt      # Dependências Python do backend
+├── data/                 # Dados brutos, processados e índices do FAISS
+│   └── ...
+├── docs/                 # Documentação e diagramas
+│   ├── fluxo_de_execucao_modulos.md
+│   └── Editor _ Mermaid Chart-2025-07-01-023651.png
+├── frontend/             # Aplicação frontend (React + Vite)
+│   ├── Dockerfile        # Dockerfile do frontend
+│   ├── package.json      # Dependências e scripts do frontend
+│   ├── public/           # Arquivos estáticos
+│   ├── src/              # Código-fonte React
+│   │   ├── App.tsx       # Componente principal do frontend
+│   │   └── ...
+│   └── ...
+├── logs/                 # Logs de execução do backend
+│   └── pipeline.log
+├── src/                  # Código-fonte principal do backend
+│   ├── config/           # Configurações globais
+│   │   └── settings.py
+│   ├── etl/              # Módulos de Extração, Transformação e Carga
+│   │   ├── extractor.py
+│   │   ├── pipeline.py
+│   │   ├── reporter.py
+│   │   └── transformer.py
+│   ├── rag/              # Módulos do sistema RAG (Retrieval Augmented Generation)
+│   │   ├── chat_history.py
+│   │   ├── rag_core.py
+│   │   └── rag_data_loader.py
+│   ├── utils/            # Utilitários diversos
+│   │   ├── cache.py
+│   │   └── logger.py
+│   ├── rag.py            # Lógica principal do RAG
+│   └── rag_builder.py    # Inicializador do sistema RAG
+└── __pycache__/          # Arquivos compilados Python
 ```
+
+### Descrição dos principais diretórios e arquivos
+
+- **api.py**: API RESTful para comunicação entre frontend e backend.
+- **main.py**: Ponto de entrada para execução de comandos (pipeline, chat, etc).
+- **docker-compose.yml**: Orquestração dos containers backend e frontend.
+- **frontend/**: Aplicação web (React + Vite) para interação com o usuário.
+- **src/**: Código-fonte do backend, organizado em módulos (etl, rag, utils, config).
+- **data/**: Dados brutos, processados e índices para busca semântica.
+- **logs/**: Logs de execução e pipeline.
+- **docs/**: Documentação e diagramas do projeto.
 
 ## 📚 Documentação Detalhada
 
