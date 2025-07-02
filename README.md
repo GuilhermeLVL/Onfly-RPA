@@ -41,30 +41,54 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 
 ---
 
-## ⚙️ Configuração
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
-    cd poke_rpa_pipeline
-    ```
+## ⚙️ Configuração Rápida
 
-2.  **Crie o arquivo de ambiente:**
-    Crie um arquivo chamado `.env` na raiz do projeto. Ele será usado para armazenar suas chaves de API.
+1. **Clone o repositório:**
+   ```bash
+   git clone <URL_DO_SEU_REPOSITORIO>
+   cd Onfly-RPA
+   ```
 
-3.  **Adicione as chaves de API ao arquivo `.env`:**
-    Você precisa de pelo menos uma das chaves abaixo. O sistema priorizará a chave do Groq se ambas estiverem presentes.
+2. **Crie o arquivo de ambiente:**
+   - Copie o arquivo `.env.example` para `.env` na raiz do projeto:
+     ```bash
+     cp .env.example .env
+     # ou no Windows:
+     copy .env.example .env
+     ```
+   - Preencha suas chaves de API no `.env`:
+     ```env
+     GROQ_API_KEY="sua_chave_groq_aqui"
+     OPENAI_API_KEY="sua_chave_openai_aqui"
+     ```
+   - Você pode obter as chaves em:
+     - https://console.groq.com/keys
+     - https://platform.openai.com/account/api-keys
 
-    https://console.groq.com/keys
-    https://platform.openai.com/account/api-keys
+3. **Garanta que as pastas `logs`, `chat_outputs` e `data` existam**
+   - Elas já são criadas automaticamente, mas se necessário, crie manualmente:
+     ```bash
+     mkdir logs chat_outputs data
+     ```
 
-    ```env
-    # Chave da API do Groq (recomendado, mais rápido e gratuito)
-    GROQ_API_KEY="sua_chave_aqui"
+4. **Execute tudo com Docker Compose:**
+   ```bash
+   docker-compose up --build
+   ```
+   - O backend (API) estará em http://localhost:8001
+   - O frontend estará em http://localhost
 
-    # Ou a chave da API da OpenAI
-    OPENAI_API_KEY="sua_chave_aqui"
-    ```
+5. **Acesse no navegador:**
+   - Frontend: http://localhost
+   - API: http://localhost:8001/docs (Swagger UI)
+
+6. **Dicas:**
+   - Para reiniciar, use `docker-compose down` e depois `docker-compose up --build`.
+   - Se quiser resetar dados, apague o conteúdo das pastas `logs`, `chat_outputs` e `data`.
+   - Se aparecer erro de CORS, certifique-se de que o backend foi reiniciado após editar `.env` ou código.
+
+---
 
 ---
 
@@ -89,18 +113,27 @@ Esta é a forma mais simples e segura de executar a aplicação, pois todo o amb
     - `--build`: Constrói a imagem se ela ainda não existir ou se houver alterações no `Dockerfile`.
     - `-d`: Executa o contêiner em segundo plano (detached mode).
 
-3.  **Execute o Pipeline de ETL (dentro do contêiner):
-**Uma vez que o contêiner esteja rodando, você pode executar o pipeline de ETL ou interagir com o chat. Os dados, logs e gráficos gerados serão salvos diretamente nas pastas `data`, `logs` e `chat_outputs` no seu computador, devido aos volumes configurados no `docker-compose.yml`.
-    ```bash
-    docker compose exec poke-rpa-pipeline python main.py pipeline
-    ```
 
-4.  **Inicie o Chat Interativo (dentro do contêiner):
-**Para iniciar o chat, use:
+3.  **Execute o Pipeline de ETL (dentro do contêiner):**
+    Com os containers rodando, execute o pipeline de ETL usando:
     ```bash
-    docker compose exec -it poke-rpa-pipeline python main.py chat
+    docker-compose exec backend python main.py pipeline
     ```
-    Para sair do chat, digite `exit` ou `quit`.
+    Isso executa o mesmo que `python main.py pipeline` faria localmente, mas dentro do container backend.
+
+
+4.  **Inicie o Chat Interativo (dentro do contêiner):**
+    Para abrir o chat interativo no terminal, siga este passo a passo:
+
+    1. Abra um novo terminal na raiz do projeto (deixe o terminal do `docker-compose up` rodando em paralelo).
+    2. Execute o comando abaixo para acessar o chat interativo dentro do container backend:
+       ```bash
+       docker-compose exec backend python main.py chat
+       ```
+    3. Converse normalmente com a IA pelo terminal.
+    4. Para sair do chat, digite `sair` ou `exit`.
+
+    > **Dica:** Você pode executar o pipeline de ETL ou o chat quantas vezes quiser, sempre usando o comando `docker-compose exec backend ...` para rodar comandos interativos dentro do container.
 
 5.  **Parar e remover os serviços (opcional):
 **Quando terminar de usar, você pode parar e remover os contêineres, redes e volumes criados pelo `docker-compose` (exceto os volumes persistentes `data`, `logs` e `chat_outputs` que você criou manualmente para a persistência):
